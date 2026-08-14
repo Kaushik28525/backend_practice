@@ -1,4 +1,4 @@
-class ApiaError extends Error {
+class ApiError extends Error {
     constructor(statusCode,
         message = "some thing went wrong",
         errors = [],
@@ -21,4 +21,4 @@ class ApiaError extends Error {
 }
 
 
-export default ApiaError;
+export {ApiError};
