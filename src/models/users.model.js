@@ -50,13 +50,14 @@
     timestamps: true,
  }
 )
-
-userSchema.pre("save", async function (next) {
-   if(!this.isModified("password")) return next(); 
+//debug
+// Mongoose versions supported that callback style. Mongoose 9 no longer supports next() in pre middleware.
+userSchema.pre("save", async function () {
+   if(!this.isModified("password")) return; 
    
    this.password = await bcrypt.hash(this.password, 10);
-   next();
-})
+   
+});
 
 userSchema.methods.isPasswordCorrect = async function (password) {
    return await bcrypt.compare(password, this.password);
